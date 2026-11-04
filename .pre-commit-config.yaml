@@ -1,0 +1,27 @@
+# Run `pre-commit install` once after cloning to enable the git hooks.
+# Run `pre-commit run --all-files` to check the whole repository.
+minimum_pre_commit_version: "3.5.0"
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: \.(rviz)$
+      - id: end-of-file-fixer
+        exclude: \.(rviz)$
+      - id: check-yaml
+      - id: check-xml
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: check-added-large-files
+        args: [--maxkb=2048]
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.1.1
+    hooks:
+      - id: flake8
+        args: [--max-line-length=120, --extend-ignore=E501,W503]
+        files: \.py$

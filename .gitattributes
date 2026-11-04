@@ -1,0 +1,27 @@
+# Normalize line endings to LF in the repository, checkout-native in the work tree.
+* text=auto eol=lf
+
+# ROS 2 / MoveIt configuration
+*.xacro   text
+*.urdf    text
+*.srdf    text
+*.rviz    text
+*.msg     text
+*.srv     text
+*.action  text
+*.launch  text
+*.launch.py text
+*.yaml    text
+*.yml     text
+
+# Binary assets (meshes, images, weights)
+*.stl  binary
+*.dae  binary
+*.obj  binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+
+# Keep generated diffs readable
+*.ipynb linguist-documentation
