@@ -66,7 +66,7 @@ gh release create v0.1.0 --generate-notes
 
 | Job | Blocking | What it does |
 | --- | --- | --- |
-| `build-and-test` | Yes | Builds all packages with `colcon` on Ubuntu 24.04 / ROS 2 Jazzy, runs `colcon test`, uploads logs. |
+| `build-and-test` | Build: yes · Tests: advisory | Builds all six packages with `colcon` on Ubuntu 24.04 / ROS 2 Jazzy, runs `colcon test`, uploads logs. Tests become blocking once the sources are lint-clean. |
 | `lint` | No (advisory) | Runs `pre-commit` (whitespace, YAML/XML validity, flake8) over the whole tree. |
 
 Promote the lint job to blocking once `pre-commit run --all-files` is clean:

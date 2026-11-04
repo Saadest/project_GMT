@@ -229,8 +229,10 @@ yet been validated on physical hardware. Current gaps, tracked in
   `exec_depends`).
 - Most `package.xml` files still carry the generator's placeholder description
   and maintainer fields.
-- Lint jobs in CI are **advisory** until the generated sources are formatted
-  cleanly.
+- The ament lint suite reports 144 flake8 findings in
+  `commander_template.py` / `test_moveit.py` (quote style, import order, line
+  length). CI therefore runs `colcon test` and `pre-commit` as **advisory**
+  jobs: the `colcon build` step is the blocking gate.
 
 ---
 
