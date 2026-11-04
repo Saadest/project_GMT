@@ -1,0 +1,78 @@
+name: Bug report
+description: Something does not build, launch or plan as documented
+title: "bug(<scope>): <short summary>"
+labels: ["type: bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Please include the exact commands you ran and the
+        full error output — most issues here come down to environment details.
+
+  - type: input
+    id: ros
+    attributes:
+      label: ROS 2 distribution and OS
+      placeholder: "Jazzy on Ubuntu 24.04"
+    validations:
+      required: true
+
+  - type: input
+    id: commit
+    attributes:
+      label: Commit / version
+      description: Output of `git rev-parse --short HEAD` or the release tag
+      placeholder: "v0.1.0 (a1b2c3d)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - Build / colcon
+        - my_robot_description (xacro, URDF, RViz display)
+        - my_robot_moveit_config (planning, SRDF, controllers)
+        - my_robot_bringup (launch, ros2_control)
+        - my_robot_commander_py
+        - my_robot_commander_cpp
+        - my_robot_interfaces
+        - CI / tooling
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. colcon build --symlink-install
+        2. ros2 launch my_robot_bringup my_robot.launch.xml
+        3. ros2 topic pub --once /joint_command ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour and logs
+      description: Paste the terminal output, or attach `ros2 doctor --report`
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context
+      description: Hardware, simulator, screenshots, RViz configuration
+    validations:
+      required: false

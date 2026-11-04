@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discussion / question
+    url: https://github.com/OWNER/project_GMT/discussions
+    about: Ask usage questions and share setups here instead of opening an issue.
+  - name: ROS 2 documentation
+    url: https://docs.ros.org/en/jazzy/
+    about: Official ROS 2 Jazzy documentation.
+  - name: MoveIt 2 documentation
+    url: https://moveit.picknik.ai/main/index.html
+    about: Official MoveIt 2 documentation.

@@ -1,0 +1,50 @@
+name: Feature request
+description: Propose a capability, refactor or documentation improvement
+title: "feat(<scope>): <short summary>"
+labels: ["type: enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What are you unable to do today, and why does it matter?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the behaviour, interface or file you would change
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Primary area
+      options:
+        - my_robot_description
+        - my_robot_moveit_config
+        - my_robot_bringup
+        - my_robot_commander_py
+        - my_robot_commander_cpp
+        - my_robot_interfaces
+        - Tooling / CI / docs
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: willingness
+    attributes:
+      label: Contribution
+      options:
+        - label: I am willing to open a pull request for this
+          required: false
