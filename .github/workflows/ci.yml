@@ -21,7 +21,7 @@ env:
 
 jobs:
   build-and-test:
-    name: Build & test (ROS 2 ${{ env.ROS_DISTRO }})
+    name: Build & test (ROS 2 Jazzy)
     runs-on: ubuntu-24.04
     timeout-minutes: 45
 
