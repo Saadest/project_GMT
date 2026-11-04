@@ -35,38 +35,42 @@ jobs:
           required-ros-distributions: ${{ env.ROS_DISTRO }}
           use-ros2-testing: false
 
-      - name: Build and test packages
-        uses: ros-tooling/action-ros-ci@v0.4
-        with:
-          target-ros2-distro: ${{ env.ROS_DISTRO }}
-          colcon-defaults: |
-            {
-              "build": {
-                "symlink-install": true,
-                "cmake-args": ["-DCMAKE_BUILD_TYPE=Release"]
-              },
-              "test": {
-                "parallel-workers": 2
-              }
-            }
-
-      - name: Show test results
-        if: always()
+      - name: Install dependencies with rosdep
         run: |
-          cd ros_ws || exit 0
-          colcon test-result --verbose || true
+          sudo rosdep init 2>/dev/null || true
+          rosdep update --rosdistro "$ROS_DISTRO"
+          # -r keeps going on keys without a rosdep definition yet
+          # (e.g. warehouse_ros_mongo), so unresolved keys never mask real errors.
+          rosdep install --from-paths . --ignore-src -r -y --rosdistro "$ROS_DISTRO"
+
+      - name: Build workspace
+        shell: bash
+        run: |
+          source "/opt/ros/$ROS_DISTRO/setup.bash"
+          colcon build --symlink-install --event-handlers console_cohesion+
+
+      - name: Run tests
+        shell: bash
+        run: |
+          # Both the ROS installation AND this workspace's install tree must be
+          # sourced, otherwise the ament lint entry points and rclpy are not
+          # importable from the tests.
+          source "/opt/ros/$ROS_DISTRO/setup.bash"
+          source install/setup.bash
+          colcon test --event-handlers console_direct+
+          colcon test-result --verbose
 
       - name: Upload colcon logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: colcon-logs
-          path: ros_ws/log
+          path: log
           if-no-files-found: ignore
           retention-days: 7
 
   lint:
-    # Advisory until generated sources are formatted cleanly.
+    # Advisory until the generated sources are formatted cleanly.
     # Remove `continue-on-error` once `pre-commit run --all-files` is green.
     name: Lint (advisory)
     runs-on: ubuntu-24.04
