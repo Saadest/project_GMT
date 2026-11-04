@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: Discussion / question
-    url: https://github.com/OWNER/project_GMT/discussions
+    url: https://github.com/Saadest/project_GMT/discussions
     about: Ask usage questions and share setups here instead of opening an issue.
   - name: ROS 2 documentation
     url: https://docs.ros.org/en/jazzy/
